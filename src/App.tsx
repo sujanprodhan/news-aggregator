@@ -14,7 +14,7 @@ const App = () => {
       <div className="flex flex-col min-h-screen">
         <Header onSearch={setSearch} />
         <main className="flex-grow container mx-auto">
-          <NewsList  />
+          <NewsList searchTerm={search} />
         </main>
         {/* <Footer /> */}
       </div>
