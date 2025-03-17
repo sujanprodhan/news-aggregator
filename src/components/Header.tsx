@@ -67,39 +67,39 @@ const Header = ({ onSearch, onFilter }: any) => {
         </nav>
       )}
 
-      
+
     </div>
     {/* Filter Menu */}
     <div className="left-0 right-0  pl-8 pr-8  pt-8 bg-white z-50 flex items-center space-x-4">
       <span> Filter by: </span>
 
-        <input type="date" name="date" 
+      <input type="date" name="date"
         value={filters.date} onChange={handleFilterChange} className="p-2 rounded text-black" />
-        <select
-          name="category"
-          value={filters.category}
-          onChange={handleFilterChange}
-          className="p-2 rounded text-black"
-        >
-          <option value="">All Categories</option>
-          <option value="news">News</option>
-          <option value="sports">Sports</option>
-          <option value="tech">Technology</option>
-        </select>
+      <select
+        name="category"
+        value={filters.category}
+        onChange={handleFilterChange}
+        className="p-2 rounded text-black"
+      >
+        <option value="">All Categories</option>
+        <option value="news">News</option>
+        <option value="sports">Sports</option>
+        <option value="tech">Technology</option>
+      </select>
 
-        <select
-          name="source"
-          value={filters.source}
-          onChange={handleFilterChange}
-          className="p-2 rounded text-black"
-        >
-          <option value="">All Sources</option>
-          <option value="bbc">BBC</option>
-          <option value="cnn">CNN</option>
-          <option value="reuters">Reuters</option>
-        </select>
-      </div>
-    </header>
+      <select
+        name="source"
+        value={filters.source}
+        onChange={handleFilterChange}
+        className="p-2 rounded text-black"
+      >
+        <option value="">All Sources</option>
+        <option value="bbc">BBC</option>
+        <option value="cnn">CNN</option>
+        <option value="reuters">Reuters</option>
+      </select>
+    </div>
+  </header>
   );
 };
 
