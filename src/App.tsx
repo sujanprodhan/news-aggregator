@@ -18,12 +18,15 @@ const App = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchNews(selectedCategory));
+    dispatch(fetchNews({ query: selectedCategory, keyword: search }));
     console.log("technology ")
-  }, [dispatch, selectedCategory]);
+  }, [dispatch, search,selectedCategory]);
 
   return (<>
     <div className="flex flex-col min-h-screen">
+      {
+        search
+      }
       <Header onSearch={setSearch} onItemCategorySelect={handleCategoryMenuClick} selectedCategory={selectedCategory}/>
       <main className="flex-grow container mx-auto">
         <div className="min-h-8 pl-4">{status === "loading" && <p>Loading...</p>}

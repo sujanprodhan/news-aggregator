@@ -1,14 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchNewsFromNewsAPI, fetchNewsFromGuardian, fetchNewsFromNYTimes } from "../services/api";
 
-export const fetchNews = createAsyncThunk("news/fetchNews", async (query: string) => {
-  const newsAPI = await fetchNewsFromNewsAPI(query);
-  const guardian = await fetchNewsFromGuardian(query);
-  // const nytimes = await fetchNewsFromNYTimes(query);
-  return [...newsAPI, ...guardian];
-});
-
-
+// Update fetchNews to accept an object containing both query and keyword
+export const fetchNews = createAsyncThunk(
+  "news/fetchNews", 
+  async ({ query, keyword }: { query: string, keyword: string }) => {
+    const newsAPI = await fetchNewsFromNewsAPI(query, keyword);
+    const guardian = await fetchNewsFromGuardian(query, keyword);
+    // const nytimes = await fetchNewsFromNYTimes(query, keyword);
+    return [...newsAPI, ...guardian];
+  }
+);
 
 interface NewsState {
   articles: any[];

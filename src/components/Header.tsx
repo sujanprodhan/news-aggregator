@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import debounce from "lodash/debounce";
 
 const Header = ({ onSearch, onFilter, onCategoryChange, onItemCategorySelect,selectedCategory }: any) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,9 +20,13 @@ const Header = ({ onSearch, onFilter, onCategoryChange, onItemCategorySelect,sel
     });
   };
 
+  const debouncedSearch = debounce((query: string) => {
+    onSearch?.(query); // Call the original onSearch prop after the debounce delay
+  }, 500);
+
   return (
-    <header>
-      <div className="bg-red-500 text-white p-4">
+    <header className="sticky top-0 z-50 bg-red-500 text-white shadow-md">
+      <div className="bg-red-500 text-white pt-3 pb-3">
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-2xl font-bold">Smart News</h1>
 
@@ -31,7 +36,7 @@ const Header = ({ onSearch, onFilter, onCategoryChange, onItemCategorySelect,sel
               <a
                 key={item}
                 href="#"
-                className={`relative px-[30px] py-2 rounded transition-all duration-300 ${
+                className={`relative px-[20px] py-2 rounded transition-all duration-300 ${
                   selectedCategory === item.toLowerCase() ? "bg-red-700 text-white" : "hover:bg-white/20"
                 }`}
                 // className="relative px-[30px] py-2 hover:bg-white/20 rounded transition-all duration-300"
@@ -47,7 +52,7 @@ const Header = ({ onSearch, onFilter, onCategoryChange, onItemCategorySelect,sel
             type="text"
             placeholder="Search news..."
             className="p-2 rounded text-black hidden sm:block"
-            onChange={(e) => onSearch?.(e.target.value)}
+            onChange={(e) => debouncedSearch(e.target.value)}
           />
 
           {/* Mobile Menu Button */}
@@ -68,15 +73,16 @@ const Header = ({ onSearch, onFilter, onCategoryChange, onItemCategorySelect,sel
               type="text"
               placeholder="Search news..."
               className="p-2 rounded text-black"
-              onChange={(e) => onSearch?.(e.target.value)}
+              // onChange={(e) => onSearch?.(e.target.value)}
+              onChange={(e) => debouncedSearch(e.target.value)} 
             />
           </nav>
         )}
       </div>
 
       {/* Filter Menu */}
-      <div className="left-0 right-0 pl-8 pr-8 pt-8 bg-white z-50 flex items-center space-x-4">
-        <span>Filter by:</span>
+       <div className="left-0 right-0 pt-2 md:pl-8 bg-white z-50 flex items-center space-x-4 "> 
+        <span className="text-red-500">Filter by:</span>
 
         <input type="date" name="date" value={filters.date} onChange={handleFilterChange} className="p-2 rounded text-black" />
         
